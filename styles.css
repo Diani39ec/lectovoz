@@ -1,0 +1,64 @@
+:root{
+  --bg:#ffffff; --fg:#111111; --accent:#005fcc; --accent-fg:#ffffff;
+  --card:#f4f6fb; --borde:#222; --foco:#ff8c00; --peligro:#b00020;
+  --fs:1.25rem; --radius:14px;
+}
+*{box-sizing:border-box}
+html{font-size:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:Verdana,Arial,Helvetica,sans-serif; font-size:var(--fs); line-height:1.7;
+}
+/* Alto contraste */
+body.alto-contraste{--bg:#000;--fg:#ffff00;--card:#000;--accent:#ffff00;--accent-fg:#000;--borde:#ffff00;--foco:#00ffff}
+body.invertir{filter:invert(1) hue-rotate(180deg)}
+body.resaltar-enlaces a, body.resaltar-enlaces button.btn-ejemplo{text-decoration:underline !important; outline:3px solid var(--foco) !important}
+body.sin-movimiento *{animation:none !important; transition:none !important}
+
+.skip-link{position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:1rem 1.5rem;z-index:100;font-size:1.3rem}
+.skip-link:focus{left:0;outline:4px solid var(--foco)}
+
+:focus-visible{outline:4px solid var(--foco);outline-offset:3px}
+
+header{background:var(--accent);color:var(--accent-fg);padding:1.2rem}
+.header-inner{max-width:1000px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+h1{margin:0;font-size:2.2rem}
+.subtitle{margin:0;font-size:1.1rem;opacity:.95}
+
+.toolbar{max-width:1000px;margin:1rem auto;padding:0 1rem;display:flex;flex-wrap:wrap;gap:.6rem}
+.toolbar button{background:var(--card);color:var(--fg);border:3px solid var(--borde);border-radius:var(--radius);padding:.7rem 1rem;font-size:1.05rem;min-height:48px;cursor:pointer}
+.toolbar button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg)}
+.toolbar .hint{display:block;font-size:.8rem;font-weight:normal}
+
+main{max-width:1000px;margin:auto;padding:0 1rem 2rem}
+.card{background:var(--card);border:3px solid var(--borde);border-radius:var(--radius);padding:1.5rem;margin:1.2rem 0}
+.label-grande{font-weight:bold;font-size:1.3rem;display:block;margin-bottom:.5rem}
+textarea{width:100%;font-size:1.3rem;line-height:1.7;padding:1rem;border:3px solid var(--borde);border-radius:var(--radius);background:var(--bg);color:var(--fg)}
+.ayuda{font-size:1rem}
+#contador{font-weight:bold}
+
+.file-row{margin:1rem 0;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+.controles-voz{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1rem 0}
+select,input[type="range"]{width:100%;min-height:48px;font-size:1.1rem}
+select{background:var(--bg);color:var(--fg);border:3px solid var(--borde);border-radius:10px;padding:.5rem}
+
+.botonera{display:flex;flex-wrap:wrap;gap:.8rem;margin:1rem 0}
+.btn{border:3px solid var(--borde);border-radius:var(--radius);padding:.9rem 1.3rem;font-size:1.15rem;min-height:56px;min-width:56px;cursor:pointer;background:var(--bg);color:var(--fg);font-weight:bold}
+.btn.grande{font-size:1.35rem;padding:1.1rem 1.6rem}
+.btn.primario{background:var(--accent);color:var(--accent-fg);border-color:var(--borde)}
+.btn.peligro{border-color:var(--peligro);color:var(--peligro)}
+body.alto-contraste .btn.peligro{color:#ff8080;border-color:#ff8080}
+.btn.secondary{background:transparent}
+.btn:hover,.toolbar button:hover{transform:scale(1.02)}
+.estado{background:var(--bg);border:2px dashed var(--borde);border-radius:10px;padding:.8rem 1rem;margin-top:1rem;font-weight:bold}
+.progreso{height:14px;background:#888;border-radius:8px;margin-top:.6rem;overflow:hidden}
+#barra{height:100%;width:0%;background:var(--accent)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.grid article{border:2px solid var(--borde);border-radius:var(--radius);padding:1rem;background:var(--bg)}
+.atajos{font-size:1.2rem}
+kbd{background:var(--bg);border:2px solid var(--borde);border-bottom-width:4px;border-radius:6px;padding:.1rem .5rem;font-family:inherit}
+footer{text-align:center;padding:1.5rem;background:var(--accent);color:var(--accent-fg);font-size:1rem}
+@media(max-width:600px){h1{font-size:1.7rem}.btn.grande{width:100%}}

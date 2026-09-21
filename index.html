@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LectoVoz — App accesible para discapacidad visual</title>
+<meta name="description" content="LectoVoz: lector de textos en voz alta con accesibilidad total WCAG 2.1.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+<header role="banner">
+  <div class="header-inner">
+    <div>
+      <h1>🔊 LectoVoz</h1>
+      <p class="subtitle">Lector en voz alta — diseñado para discapacidad visual</p>
+    </div>
+    <nav aria-label="Accesibilidad rápida">
+      <button id="btn-ayuda-voz" class="btn secondary" aria-label="Escuchar instrucciones de uso">❓ Escuchar ayuda</button>
+    </nav>
+  </div>
+</header>
+
+<div class="toolbar" role="toolbar" aria-label="Opciones de accesibilidad visual">
+  <button id="btn-font-menos" aria-label="Reducir tamaño de letra">A- <span class="hint">Letra más pequeña</span></button>
+  <button id="btn-font-mas" aria-label="Aumentar tamaño de letra">A+ <span class="hint">Letra más grande</span></button>
+  <button id="btn-contraste" aria-pressed="false">◐ Alto contraste</button>
+  <button id="btn-invertir" aria-pressed="false">◑ Invertir colores</button>
+  <button id="btn-enlaces" aria-pressed="false">🔗 Resaltar enlaces</button>
+  <button id="btn-movimiento" aria-pressed="false">⏸ Quitar animaciones</button>
+  <button id="btn-reset">↺ Restablecer</button>
+</div>
+
+<main id="contenido" tabindex="-1">
+  <section aria-labelledby="titulo-lector" class="card principal">
+    <h2 id="titulo-lector">1. Escribe o pega tu texto</h2>
+    <label for="texto" class="label-grande">Texto para leer en voz alta:</label>
+    <textarea id="texto" rows="7" placeholder="Pega aquí una noticia, un documento, una carta… y pulsa LEER. También puedes pulsar Alt + L para leer." aria-describedby="contador ayuda-texto">Bienvenido a LectoVoz. Esta aplicación lee en voz alta cualquier texto para personas con discapacidad visual. Pega tu texto aquí y pulsa el botón grande LEER.</textarea>
+    <p id="contador" aria-live="polite">0 palabras · 0 caracteres</p>
+    <p id="ayuda-texto" class="ayuda">Consejo: selecciona cualquier texto de esta página y pulsa el botón «Leer selección».</p>
+
+    <div class="file-row">
+      <label for="archivo" class="btn secondary">📂 Leer archivo .txt</label>
+      <input type="file" id="archivo" accept=".txt,.md,text/plain" class="sr-only">
+      <span id="nombre-archivo" aria-live="polite"></span>
+    </div>
+
+    <h3 id="titulo-voces">Voz y velocidad</h3>
+    <div class="controles-voz">
+      <div>
+        <label for="voces">Voz:</label>
+        <select id="voces" aria-label="Elegir voz"></select>
+      </div>
+      <div>
+        <label for="velocidad">Velocidad: <output id="vel-valor" for="velocidad">1</output></label>
+        <input type="range" id="velocidad" min="0.5" max="2" step="0.1" value="1">
+      </div>
+      <div>
+        <label for="volumen">Volumen: <output id="vol-valor" for="volumen">100%</output></label>
+        <input type="range" id="volumen" min="0" max="1" step="0.1" value="1">
+      </div>
+    </div>
+
+    <div class="botonera" role="group" aria-label="Controles del lector">
+      <button id="btn-leer" class="btn grande primario">▶ LEER EN VOZ ALTA</button>
+      <button id="btn-pausar" class="btn grande">⏸ Pausar</button>
+      <button id="btn-reanudar" class="btn grande">⏵ Continuar</button>
+      <button id="btn-detener" class="btn grande peligro">⏹ Detener</button>
+      <button id="btn-seleccion" class="btn grande secondary">🖱 Leer selección</button>
+    </div>
+
+    <div id="estado" class="estado" role="status" aria-live="polite">Listo. Pulsa LEER para empezar.</div>
+    <div class="progreso" aria-hidden="true"><div id="barra"></div></div>
+  </section>
+
+  <section aria-labelledby="titulo-ejemplos" class="card">
+    <h2 id="titulo-ejemplos">2. Textos de ejemplo — pulsa para escuchar</h2>
+    <div class="grid">
+      <article>
+        <h3>📰 Noticia</h3>
+        <p>La tecnología de lectura en voz alta permite a millones de personas con discapacidad visual acceder a libros, noticias y documentos de forma autónoma.</p>
+        <button class="btn secondary btn-ejemplo" data-ejemplo="noticia">Escuchar noticia</button>
+      </article>
+      <article>
+        <h3>📖 Cuento corto</h3>
+        <p>Había una vez una voz que vivía en una cajita. Cuando alguien escribía palabras, la voz despertaba y las cantaba para que nadie se quedara sin historias.</p>
+        <button class="btn secondary btn-ejemplo" data-ejemplo="cuento">Escuchar cuento</button>
+      </article>
+      <article>
+        <h3>📋 Instrucciones</h3>
+        <p>Para usar LectoVoz: primero, escribe tu texto. Segundo, elige tu voz favorita. Tercero, pulsa el botón grande LEER. Puedes pausar con Alt más P y detener con Alt más S.</p>
+        <button class="btn secondary btn-ejemplo" data-ejemplo="instrucciones">Escuchar instrucciones</button>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="titulo-atajos" class="card">
+    <h2 id="titulo-atajos">3. Atajos de teclado</h2>
+    <p>Esta app se puede usar <strong>sin ratón, solo con teclado</strong>. Pulsa <kbd>Tab</kbd> para moverte.</p>
+    <ul class="atajos">
+      <li><kbd>Alt</kbd> + <kbd>L</kbd> — Leer texto</li>
+      <li><kbd>Alt</kbd> + <kbd>P</kbd> — Pausar / Continuar</li>
+      <li><kbd>Alt</kbd> + <kbd>S</kbd> — Detener</li>
+      <li><kbd>Alt</kbd> + <kbd>+</kbd> — Agrandar letra</li>
+      <li><kbd>Alt</kbd> + <kbd>-</kbd> — Achicar letra</li>
+    </ul>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <p>LectoVoz · 100% gratuita · Funciona sin internet tras cargar · Tus textos nunca salen de tu dispositivo.</p>
+  <p>Sigue WCAG 2.1 AA: navegación por teclado, regiones ARIA, foco visible, contraste ajustable.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
