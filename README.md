@@ -1,6 +1,6 @@
-# 🔊 LectoVoz — App accesible para discapacidad visual
+# 🔊 LectoVoz — App accesible para discapacidad visual · Por Diana Trujillo
 
-Lector de textos en voz alta con accesibilidad total (WCAG 2.1 AA). 100% front-end, sin backend, tus textos nunca salen del dispositivo.
+Lector de textos en voz alta con accesibilidad total (WCAG 2.1 AA). 100% front-end, sin backend: tus textos nunca salen del dispositivo.
 
 ## Funciones
 - 🔊 Leer en voz alta, pausar, continuar, detener (Web Speech API)
@@ -10,19 +10,38 @@ Lector de textos en voz alta con accesibilidad total (WCAG 2.1 AA). 100% front-e
 - ⌨️ 100% navegable por teclado + atajos `Alt+L` / `Alt+P` / `Alt+S`
 - 📱 Responsive, botones grandes (56px), foco visible, regiones ARIA
 
-## Uso local (Laragon)
+## Demo local
 ```
 http://localhost/lectovoz/
 ```
+Demo en GitHub Pages: Settings → Pages → Deploy from branch → `main` → `/ (root)`.
 
-## Demo en GitHub Pages
-Activa Pages: Settings → Pages → Deploy from branch → `main` → `/ (root)`.
-
-## Estructura
+## Estructura del proyecto
 ```
 lectovoz/
-├── index.html
-├── styles.css
-├── app.js
+├── index.html          · Estructura semántica: lector, ejemplos, atajos (skip-link, ARIA)
+├── styles.css          · Temas (normal, alto contraste, invertido), foco visible, responsive
+├── app.js              · SpeechSynthesis: leer/pausar/continuar/detener/selección,
+│                         voces, velocidad, archivo .txt, atajos de teclado
+├── lectovoz_db.sql     · Esquema opcional (historial multi-usuario a futuro)
 └── README.md
 ```
+
+## Base de datos `lectovoz_db` (extensión opcional)
+| Tabla | Guarda |
+|---|---|
+| `usuarios` | nombre, email único, tipo de discapacidad |
+| `preferencias_accesibilidad` | fuente, contrastes, voz y velocidad (1 por usuario) |
+| `textos` | título, contenido, categoría, nº de palabras (generada), FULLTEXT |
+| `lecturas` | historial usuario + texto, duración, completada |
+| `voces_favoritas` | voces preferidas por usuario |
+| `vista_historial` | historial legible |
+
+```powershell
+Get-Content lectovoz_db.sql -Raw | mysql -u root
+```
+
+## Stack
+HTML + CSS + JavaScript (Web Speech API) + MySQL (opcional).
+
+Hecho por **Diana Trujillo** ✨
